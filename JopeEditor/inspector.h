@@ -3,6 +3,7 @@
 
 #include <QWidget>
 
+class QLineEdit;
 
 class Inspector : public QWidget
 {
@@ -11,6 +12,14 @@ class Inspector : public QWidget
 public:
     explicit Inspector(QWidget *parent = nullptr);
     ~Inspector();
+
+
+public:
+    QLineEdit* name;
+
+public slots:
+
+    void TextChanged(QString new_name);
 
 };
 
