@@ -23,6 +23,10 @@ MainWindow::MainWindow(QWidget *parent) :
     //Maybe we should change the reciver to editor/inspector class
     connect(ui->actionUndo, SIGNAL(triggered()), this, SLOT(UndoAction()));
     connect(ui->actionRedo, SIGNAL(triggered()), this, SLOT(RedoAction()));
+
+    //Hide Icons from MenuBar
+    qApp->instance()->setAttribute(Qt::AA_DontShowIconsInMenus, true);
+
 }
 
 MainWindow::~MainWindow()
