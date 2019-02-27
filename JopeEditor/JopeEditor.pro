@@ -27,12 +27,14 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     inspector.cpp \
-    scene.cpp
+    scene.cpp \
+    gameobject.cpp
 
 HEADERS += \
         mainwindow.h \
     inspector.h \
-    scene.h
+    scene.h \
+    gameobject.h
 
 FORMS += \
         mainwindow.ui
