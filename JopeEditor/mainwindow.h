@@ -7,6 +7,7 @@ namespace Ui {
 class MainWindow;
 }
 
+class Hierarchy;
 class Inspector;
 class Scene;
 
@@ -28,6 +29,7 @@ public slots:
 
 private:
     Ui::MainWindow *ui;
+    Hierarchy *hierarchy;
     Inspector* inspector;
     Scene* scene;
 };

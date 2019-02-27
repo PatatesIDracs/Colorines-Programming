@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "scene.h"
 #include "inspector.h"
+#include "hierarchy.h"
 #include "iostream"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -16,6 +17,10 @@ MainWindow::MainWindow(QWidget *parent) :
     //Add Inspector widget
     inspector = new Inspector();
     ui->dock_inspector->setWidget(inspector);
+
+    //Add Hierarchy widget
+    hierarchy = new Hierarchy();
+    ui->dock_hierachy->setWidget(hierarchy);
 
     //Connect Actions triggered() signals to Slots
     connect(ui->actionCreate_new_scene, SIGNAL(triggered()), this, SLOT(CreateNewScene()));
