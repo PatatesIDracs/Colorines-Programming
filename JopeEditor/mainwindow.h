@@ -8,6 +8,7 @@ class MainWindow;
 }
 
 class Inspector;
+class Scene;
 
 class MainWindow : public QMainWindow
 {
@@ -28,6 +29,7 @@ public slots:
 private:
     Ui::MainWindow *ui;
     Inspector* inspector;
+    Scene* scene;
 };
 
 #endif // MAINWINDOW_H

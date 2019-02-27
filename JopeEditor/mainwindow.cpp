@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "scene.h"
 #include "inspector.h"
 #include "iostream"
 
@@ -9,6 +10,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    scene = new Scene();
+    setCentralWidget(scene);
 
     //Add Inspector widget
     inspector = new Inspector();
