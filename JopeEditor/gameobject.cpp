@@ -2,5 +2,5 @@
 
 GameObject::GameObject()
 {
-
+    name = "New GameObject";
 }
