@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QVector>
+#include <QListWidgetItem>
 
 namespace Ui {
 class Hierarchy;
@@ -20,10 +21,22 @@ public:
 
 public slots:
     void CreateNewGO();
+    void RemoveGO();
+
+    void OnItemClicked(QListWidgetItem*);
+
+    void CreateNewScene();
+    void OpenScene();
+    void SaveScene();
+    void UndoAction();
+    void RedoAction();
+
 
 private:
     Ui::Hierarchy *ui;
-    QVector<GameObject> objects;
+    QVector<GameObject*> objects;
+
+    GameObject* selected;
 
 private:
     void PrintObjects();

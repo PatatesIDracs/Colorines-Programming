@@ -6,7 +6,7 @@
 class GameObject
 {
 public:
-    GameObject();
+    GameObject(int i);
 
 
 public:

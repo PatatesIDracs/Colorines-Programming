@@ -1,6 +1,7 @@
 #include "gameobject.h"
 
-GameObject::GameObject()
+GameObject::GameObject(int i)
 {
-    name = "New GameObject";
+    name = "New GameObject ";
+    name.append(QString::number(i));
 }
