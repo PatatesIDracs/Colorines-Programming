@@ -1,26 +1,29 @@
 #include "inspector.h"
+#include "transform.h"
 
 #include <QLayout>
 #include <QBoxLayout>
 #include <QSpacerItem>
-#include <QLabel>
 #include <QLineEdit>
+#include <QPushButton>
 
 Inspector::Inspector(QWidget *parent) :
     QWidget(parent)
 {
 
     //Subwidgets --> Add transform and others
-   name = new QLineEdit();
+    name = new QLineEdit();
     QSpacerItem* spacer = new QSpacerItem(1,1,QSizePolicy::Expanding,QSizePolicy::Expanding);
+    transform = new Transform();
 
+
+
+    //Set the layout
     QVBoxLayout* layout = new QVBoxLayout;
-
     layout->addWidget(name);
+    layout->addWidget(transform);
     layout->addItem(spacer);
-
     setLayout(layout);
-
 
 
     //Slot connections

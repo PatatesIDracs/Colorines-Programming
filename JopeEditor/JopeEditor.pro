@@ -29,18 +29,21 @@ SOURCES += \
     inspector.cpp \
     scene.cpp \
     gameobject.cpp \
-    hierarchy.cpp
+    hierarchy.cpp \
+    transform.cpp
 
 HEADERS += \
         mainwindow.h \
     inspector.h \
     scene.h \
     gameobject.h \
-    hierarchy.h
+    hierarchy.h \
+    transform.h
 
 FORMS += \
         mainwindow.ui \
-    hierarchy.ui
+    hierarchy.ui \
+    transform.ui
 
 RESOURCES += \
     icons.qrc
