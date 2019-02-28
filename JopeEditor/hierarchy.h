@@ -23,7 +23,7 @@ public slots:
     void CreateNewGO();
     void RemoveGO();
 
-    void OnItemClicked(QListWidgetItem*);
+    void OnItemClicked();
 
     void CreateNewScene();
     void OpenScene();

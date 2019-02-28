@@ -12,7 +12,7 @@ Hierarchy::Hierarchy(QWidget *parent) :
     connect(ui->button_addEntity,SIGNAL(clicked()),this,SLOT(CreateNewGO()));
     connect(ui->button_removeEntity, SIGNAL(clicked()), this, SLOT(RemoveGO()));
 
-    connect(ui->listWidget,SIGNAL(itemClicked(QListWidgetItem*)),this,SLOT(itemClicked(QListWidgetItem*)));
+    connect(ui->listWidget,SIGNAL(itemClicked(QListWidgetItem*)),this,SLOT(OnItemClicked()));
 }
 
 Hierarchy::~Hierarchy()
@@ -35,24 +35,39 @@ void Hierarchy::CreateNewGO()
 
 void Hierarchy::RemoveGO()
 {
-    for(uint i = objects.size(); i > 0; i--)
+    for(uint i = 0; i < objects.size(); i++)
     {
         if(objects[i] == selected)
         {
-            for(uint j = i; j < objects.size()-1; j++)
-            {
-                objects[j] = objects[j+1];
-            }
-            objects.pop_back();
+
+            std::cout << "object[i]: " + objects[i]->name.toStdString() << std::endl;
+            std::cout << "selected[i]: " + selected->name.toStdString() << std::endl;
+
+            objects.remove(i);
+
+
+            ui->listWidget->removeItemWidget(ui->listWidget->currentItem());
+
+
+            std::cout << "List f: " + ui->listWidget->count() << std::endl;
             break;
         }
     }
 }
 
-void Hierarchy::OnItemClicked(QListWidgetItem *itemSelected)
+void Hierarchy::OnItemClicked()
 {
-    //QModelIndex index = ui->listWidget->indexFromItem(itemSelected);
-    //selected = objects[index];
+    QListWidgetItem *item = ui->listWidget->currentItem();
+
+    int size = ui->listWidget->count();
+    for(int i = 0; i < size; i++)
+    {
+        if(item == ui->listWidget->item(i))
+        {
+            selected = objects[i];
+            break;
+        }
+    }
 }
 
 void Hierarchy::CreateNewScene()
