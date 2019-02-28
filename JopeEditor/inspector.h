@@ -4,6 +4,7 @@
 #include <QWidget>
 
 class QLineEdit;
+class Transform;
 
 class Inspector : public QWidget
 {
@@ -16,6 +17,7 @@ public:
 
 public:
     QLineEdit* name;
+    Transform* transform;
 
 public slots:
 
