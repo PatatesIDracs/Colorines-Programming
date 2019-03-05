@@ -27,29 +27,19 @@ void Hierarchy::CreateNewGO()
 {
     int numObj = objects.size();
 
-    objects.push_back(new GameObject(numObj));
-    ui->listWidget->addItem(objects[numObj]->name);
-
-    std::cout << "Added GO: " << numObj << std::endl;
+    selected = new GameObject(numObj);
+    objects.push_back(selected);
+    ui->listWidget->addItem(selected->name);
 }
 
 void Hierarchy::RemoveGO()
 {
-    for(uint i = 0; i < objects.size(); i++)
+    for(int i = 0; i < objects.size(); i++)
     {
         if(objects[i] == selected)
         {
-
-            std::cout << "object[i]: " + objects[i]->name.toStdString() << std::endl;
-            std::cout << "selected[i]: " + selected->name.toStdString() << std::endl;
-
             objects.remove(i);
-
-
-            ui->listWidget->removeItemWidget(ui->listWidget->currentItem());
-
-
-            std::cout << "List f: " + ui->listWidget->count() << std::endl;
+            delete ui->listWidget->takeItem(ui->listWidget->row(ui->listWidget->currentItem()));
             break;
         }
     }
@@ -72,8 +62,6 @@ void Hierarchy::OnItemClicked()
 
 void Hierarchy::CreateNewScene()
 {
-    std::cout << "Create New Scene" << std::endl;
-
     // Clear objects QVector
     qDeleteAll(objects.begin(), objects.end());
     objects.clear();
