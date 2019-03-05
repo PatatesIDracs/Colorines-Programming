@@ -19,6 +19,8 @@ public:
     explicit Hierarchy(QWidget *parent = nullptr);
     ~Hierarchy();
 
+    void DrawHierarchy(QPainter* painter);
+
 public slots:
     void CreateNewGO();
     void RemoveGO();

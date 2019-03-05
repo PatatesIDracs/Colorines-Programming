@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QWidget>
 
+class Hierarchy;
+
 class Scene : public QWidget
 {
     Q_OBJECT
@@ -21,6 +23,11 @@ public slots:
 private:
 
     void paintEvent(QPaintEvent* event) override;
+
+public:
+    Hierarchy   *hierarchy;
+    //QPainter    *painter;
+
 };
 
 #endif // SCENE_H

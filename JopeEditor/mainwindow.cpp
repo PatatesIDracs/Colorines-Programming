@@ -22,6 +22,8 @@ MainWindow::MainWindow(QWidget *parent) :
     hierarchy = new Hierarchy();
     ui->dock_hierachy->setWidget(hierarchy);
 
+    scene->hierarchy = hierarchy;
+
     //Connect Actions triggered() signals to Slots
     connect(ui->actionCreate_new_scene, SIGNAL(triggered()), hierarchy, SLOT(CreateNewScene()));
     connect(ui->actionOpen_File, SIGNAL(triggered()), hierarchy, SLOT(OpenScene()));

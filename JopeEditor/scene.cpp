@@ -1,11 +1,16 @@
 #include "scene.h"
+#include "hierarchy.h"
+
 #include <QPainter>
 
+// TODO delete QPainter
 
 
 Scene::Scene(QWidget *parent) : QWidget (parent)
 {
     setAutoFillBackground(true);
+
+    //painter = new QPainter(this);
 }
 
 QSize Scene::sizeHint() const
@@ -25,6 +30,9 @@ void Scene::paintEvent(QPaintEvent *)
     QColor blackColor = QColor::fromRgb(0,0,0);
 
     QPainter painter(this);
+
+    //hierarchy->DrawHierarchy(painter);
+
 
     QBrush brush;
     QPen pen;

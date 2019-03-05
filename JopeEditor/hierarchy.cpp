@@ -23,6 +23,14 @@ Hierarchy::~Hierarchy()
     delete ui;
 }
 
+void Hierarchy::DrawHierarchy(QPainter* painter)
+{
+    for(int i = 0; i < objects.size(); i++)
+    {
+        objects[i]->DrawGeo(painter);
+    }
+}
+
 void Hierarchy::CreateNewGO()
 {
     int numObj = objects.size();
