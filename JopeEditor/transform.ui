@@ -44,7 +44,7 @@
       <widget class="QDoubleSpinBox" name="scale_x"/>
      </item>
      <item>
-      <widget class="QDoubleSpinBox" name="translate_y_2"/>
+      <widget class="QDoubleSpinBox" name="scale_y"/>
      </item>
     </layout>
    </item>

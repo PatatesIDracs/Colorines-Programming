@@ -2,6 +2,7 @@
 #define GAMEOBJECT_H
 
 #include <QString>
+#include <QVector2D>
 
 class QPainter;
 
@@ -22,11 +23,14 @@ public:
 
     void DrawGeo(QPainter* painter);
 
+        void SetPos(float x, float y);
+
 private:
     void DrawPoint(QPainter* painter);
 
 public:
     QString name;
+    QVector2D pos;
     ShapeType type;
 
 };

@@ -1,5 +1,6 @@
 #include "hierarchy.h"
 #include "ui_hierarchy.h"
+#include "inspector.h"
 #include "gameobject.h"
 #include <iostream>
 
@@ -66,6 +67,7 @@ void Hierarchy::OnItemClicked()
             break;
         }
     }
+    inspector->SetSelectedGO(selected);
 }
 
 void Hierarchy::CreateNewScene()

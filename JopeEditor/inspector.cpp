@@ -1,11 +1,14 @@
 #include "inspector.h"
 #include "transform.h"
+#include "gameobject.h"
 
 #include <QLayout>
 #include <QBoxLayout>
 #include <QSpacerItem>
 #include <QLineEdit>
 #include <QPushButton>
+#include <iostream>
+
 
 Inspector::Inspector(QWidget *parent) :
     QWidget(parent)
@@ -13,13 +16,13 @@ Inspector::Inspector(QWidget *parent) :
 
     //Subwidgets --> Add transform and others
     name = new QLineEdit();
-    QSpacerItem* spacer = new QSpacerItem(1,1,QSizePolicy::Expanding,QSizePolicy::Expanding);
+    spacer = new QSpacerItem(1,1,QSizePolicy::Expanding,QSizePolicy::Expanding);
     transform = new Transform();
 
 
 
     //Set the layout
-    QVBoxLayout* layout = new QVBoxLayout;
+    layout = new QVBoxLayout;
     layout->addWidget(name);
     layout->addWidget(transform);
     layout->addItem(spacer);
@@ -28,7 +31,7 @@ Inspector::Inspector(QWidget *parent) :
 
     //Slot connections
     connect(name,SIGNAL(textEdited(QString)),this, SLOT(TextChanged(QString)));
-
+    connect(transform->GetTranslationXUI(), SIGNAL(valueChanged(double)), this, SLOT(TransformChanged()));
 }
 
 Inspector::~Inspector()
@@ -38,4 +41,23 @@ Inspector::~Inspector()
 void Inspector::TextChanged(QString new_name)
 {
     name->setText("This has changed");
+    layout->removeItem(spacer);
+    // layout->addWidget(curr_transform);
+    layout->addItem(spacer);
+}
+
+void Inspector::TransformChanged()
+{
+    std::cout << "Transform" << std::endl;
+    if(current_go != nullptr)
+    {
+        current_go->SetPos(transform->GetPosX(), transform->GetPosY());
+    }
+}
+
+void Inspector::SetSelectedGO(GameObject* new_go)
+{
+    current_go = new_go;
+    name->setText(new_go->name);
+    transform->SetPosition(new_go->pos.x(), new_go->pos.y());
 }

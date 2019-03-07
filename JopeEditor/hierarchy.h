@@ -9,6 +9,7 @@ namespace Ui {
 class Hierarchy;
 }
 
+class Inspector;
 class GameObject;
 
 class Hierarchy : public QWidget
@@ -33,7 +34,8 @@ public slots:
     void UndoAction();
     void RedoAction();
 
-
+public:
+    Inspector* inspector;
 private:
     Ui::Hierarchy *ui;
     QVector<GameObject*> objects;

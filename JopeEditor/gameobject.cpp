@@ -45,3 +45,11 @@ void GameObject::DrawPoint(QPainter* painter)
     painter->drawPoint(50,75);
 
 }
+
+void GameObject::SetPos(float x, float y)
+{
+    pos.setX(x);
+   // qDebug("Pos X: %f", pos.x());
+    pos.setY(y);
+   // qDebug("Pos Y: %f", pos.y());
+}

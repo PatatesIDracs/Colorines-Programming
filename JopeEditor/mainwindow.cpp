@@ -21,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //Add Hierarchy widget
     hierarchy = new Hierarchy();
     ui->dock_hierachy->setWidget(hierarchy);
+    hierarchy->inspector = inspector;
 
     scene->hierarchy = hierarchy;
 
