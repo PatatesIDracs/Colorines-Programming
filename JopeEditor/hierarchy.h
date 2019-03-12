@@ -20,7 +20,11 @@ public:
     explicit Hierarchy(QWidget *parent = nullptr);
     ~Hierarchy();
 
-    void DrawHierarchy(QPainter* painter);
+    void DrawHierarchy(QWidget* scene);
+
+signals:
+
+    void SigObjectAdded(GameObject*);
 
 public slots:
     void CreateNewGO();

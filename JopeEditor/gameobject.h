@@ -21,12 +21,10 @@ class GameObject
 public:
     GameObject(int i);
 
-    void DrawGeo(QPainter* painter);
+    void DrawGeo(QBrush &brush, QPen &pen);
 
         void SetPos(float x, float y);
 
-private:
-    void DrawPoint(QPainter* painter);
 
 public:
     QString name;

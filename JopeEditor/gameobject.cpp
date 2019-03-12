@@ -8,41 +8,14 @@ GameObject::GameObject(int i) : type(POINT_SHAPE)
 
 }
 
-void GameObject::DrawGeo(QPainter* painter)
+void GameObject::DrawGeo(QBrush &brush,QPen &pen)
 {
-    switch (type) {
-    case POINT_SHAPE:
-        DrawPoint(painter);
-        break;
-    case LINE_SHAPE:
-
-        break;
-    case RECT_SHAPE:
-
-        break;
-    case CIRCLE_SHAPE:
-
-        break;
-    case ELIPSE_SHAPE:
-
-        break;
-    default:
-        break;
-    }
-}
-
-void GameObject::DrawPoint(QPainter* painter)
-{
-    QColor blueColor = QColor::fromRgb(100,100,100);
-
-    QBrush brush;
-    QPen pen;
-
-    //Brush/Pen configuration
-    brush.setColor(blueColor);
+    brush.setColor(QColor::fromRgb(127,190,220));
     brush.setStyle(Qt::BrushStyle::SolidPattern);
+
+    pen.setWidth(4);
+    pen.setColor(QColor::fromRgb(127,190,220));
     pen.setStyle(Qt::PenStyle::NoPen);
-    painter->drawPoint(50,75);
 
 }
 

@@ -35,6 +35,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionUndo, SIGNAL(triggered()), hierarchy, SLOT(UndoAction()));
     connect(ui->actionRedo, SIGNAL(triggered()), hierarchy, SLOT(RedoAction()));
 
+    //Signals to update Scene, Inspector, etc.
+    connect(hierarchy,SIGNAL(SigObjectAdded(GameObject*)), scene, SLOT(update()));
+
+
     //Hide Icons from MenuBar
     qApp->instance()->setAttribute(Qt::AA_DontShowIconsInMenus, true);
 

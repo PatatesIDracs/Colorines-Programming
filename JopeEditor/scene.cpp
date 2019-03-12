@@ -2,7 +2,7 @@
 #include "hierarchy.h"
 
 #include <QPainter>
-
+#include <iostream>
 // TODO delete QPainter
 
 
@@ -25,16 +25,15 @@ QSize Scene::minimumSizeHint() const
 
 void Scene::paintEvent(QPaintEvent *)
 {
-    QColor blueColor = QColor::fromRgb(127,190,220);
+    //QColor blueColor = QColor::fromRgb(127,190,220);
     QColor whiteColor = QColor::fromRgb(255,255,255);
     QColor blackColor = QColor::fromRgb(0,0,0);
 
     QPainter painter(this);
 
-    //hierarchy->DrawHierarchy(painter);
+    hierarchy->DrawHierarchy(this);
 
-
-    QBrush brush;
+    /*QBrush brush;
     QPen pen;
 
     //Brush/Pen configuration
@@ -60,5 +59,5 @@ void Scene::paintEvent(QPaintEvent *)
     int x = rect().width() / 3 - r;
     int y = rect().height() / 2 - r;
     QRect circleRect(x,y,w,h);
-    painter.drawEllipse(circleRect);
+    painter.drawEllipse(circleRect);*/
 }

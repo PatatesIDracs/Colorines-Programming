@@ -3,6 +3,7 @@
 #include "inspector.h"
 #include "gameobject.h"
 #include <iostream>
+#include "QPainter"
 
 Hierarchy::Hierarchy(QWidget *parent) :
     QWidget(parent),
@@ -24,12 +25,22 @@ Hierarchy::~Hierarchy()
     delete ui;
 }
 
-void Hierarchy::DrawHierarchy(QPainter* painter)
+void Hierarchy::DrawHierarchy(QWidget* scene)
 {
+    QPainter painter(scene);
+
+    QBrush  brush;
+    QPen    pen;
+
+
     for(int i = 0; i < objects.size(); i++)
     {
-        objects[i]->DrawGeo(painter);
+        objects[i]->DrawGeo(brush, pen);
+        painter.setBrush(brush);
+        painter.setPen(pen);
+        //painter.drawRect(QRect(50,50,25,60));
     }
+    painter.drawRect(QRect(50,50,25,60));
 }
 
 void Hierarchy::CreateNewGO()
@@ -39,6 +50,8 @@ void Hierarchy::CreateNewGO()
     selected = new GameObject(numObj);
     objects.push_back(selected);
     ui->listWidget->addItem(selected->name);
+
+    emit SigObjectAdded(selected);
 }
 
 void Hierarchy::RemoveGO()
