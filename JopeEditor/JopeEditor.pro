@@ -30,7 +30,8 @@ SOURCES += \
     scene.cpp \
     gameobject.cpp \
     hierarchy.cpp \
-    transform.cpp
+    transform.cpp \
+    renderer.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -38,7 +39,8 @@ HEADERS += \
     scene.h \
     gameobject.h \
     hierarchy.h \
-    transform.h
+    transform.h \
+    renderer.h
 
 FORMS += \
         mainwindow.ui \
