@@ -9,8 +9,6 @@
 Scene::Scene(QWidget *parent) : QWidget (parent)
 {
     setAutoFillBackground(true);
-
-    //painter = new QPainter(this);
 }
 
 QSize Scene::sizeHint() const
@@ -25,11 +23,9 @@ QSize Scene::minimumSizeHint() const
 
 void Scene::paintEvent(QPaintEvent *)
 {
-    //QColor blueColor = QColor::fromRgb(127,190,220);
+    QColor blueColor = QColor::fromRgb(127,190,220);
     QColor whiteColor = QColor::fromRgb(255,255,255);
     QColor blackColor = QColor::fromRgb(0,0,0);
-
-    QPainter painter(this);
 
     hierarchy->DrawHierarchy(this);
 

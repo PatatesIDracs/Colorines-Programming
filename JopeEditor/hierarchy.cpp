@@ -32,26 +32,41 @@ void Hierarchy::DrawHierarchy(QWidget* scene)
     QBrush  brush;
     QPen    pen;
 
-
+    GameObject* drawnObject = nullptr;
     for(int i = 0; i < objects.size(); i++)
     {
-        objects[i]->DrawGeo(brush, pen);
+        drawnObject = objects[i];
+        drawnObject->DrawGeo(brush, pen);
         painter.setBrush(brush);
         painter.setPen(pen);
-        //painter.drawRect(QRect(50,50,25,60));
+
+        switch (drawnObject->GetShape()) {
+        case ShapeType::RECT_SHAPE:
+            painter.drawRect(drawnObject->GetRect());
+            break;
+        case ShapeType::CIRCLE_SHAPE:
+            painter.drawEllipse(drawnObject->GetCircle());
+            break;
+        case ShapeType::ELLIPSE_SHAPE:
+            painter.drawEllipse(drawnObject->GetEllipse());
+            break;
+        default:
+            break;
+        }
     }
-    painter.drawRect(QRect(50,50,25,60));
 }
 
 void Hierarchy::CreateNewGO()
 {
     int numObj = objects.size();
 
-    selected = new GameObject(numObj);
-    objects.push_back(selected);
-    ui->listWidget->addItem(selected->name);
+    GameObject* temp = new GameObject(numObj);
+    objects.push_back(temp);
+    ui->listWidget->addItem(temp->name);
 
-    emit SigObjectAdded(selected);
+    emit SigObjectAdded(temp);
+
+
 }
 
 void Hierarchy::RemoveGO()
@@ -62,9 +77,11 @@ void Hierarchy::RemoveGO()
         {
             objects.remove(i);
             delete ui->listWidget->takeItem(ui->listWidget->row(ui->listWidget->currentItem()));
+            selected =nullptr;
             break;
         }
     }
+    emit SigObjectAdded(nullptr);
 }
 
 void Hierarchy::OnItemClicked()

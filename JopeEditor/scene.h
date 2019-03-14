@@ -15,18 +15,12 @@ public:
     QSize sizeHint() const override;
     QSize minimumSizeHint() const override;
 
-signals:
-
-public slots:
-
-
 private:
 
     void paintEvent(QPaintEvent* event) override;
 
 public:
     Hierarchy   *hierarchy;
-    //QPainter    *painter;
 
 };
 

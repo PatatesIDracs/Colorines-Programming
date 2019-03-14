@@ -13,7 +13,7 @@ enum ShapeType
     LINE_SHAPE,
     RECT_SHAPE,
     CIRCLE_SHAPE,
-    ELIPSE_SHAPE
+    ELLIPSE_SHAPE
 };
 
 class GameObject
@@ -23,14 +23,25 @@ public:
 
     void DrawGeo(QBrush &brush, QPen &pen);
 
+    // Transform Methods
     void SetPos(float x, float y);
     void SetScale(float x, float y);
 
+    // Shape Methods
+    ShapeType GetShape() const;
+    QRect GetRect() const;
+    QRect GetCircle() const;
+    QRect GetEllipse() const;
+
 public:
+    // Transform
     QString name;
     QVector2D pos;
     QVector2D scale;
+
+    // Shape
     ShapeType type;
+    QVector2D size;
 
 };
 
