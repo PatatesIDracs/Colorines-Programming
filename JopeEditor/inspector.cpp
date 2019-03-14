@@ -52,18 +52,20 @@ void Inspector::TextChanged(QString new_name)
 
 void Inspector::TransformChanged()
 {
-    std::cout << "Transform" << std::endl;
+    std::cout << "Transform Changed" << std::endl;
     if(current_go != nullptr)
     {
         current_go->SetPos(transform->GetPosX(), transform->GetPosY());
         current_go->SetScale(transform->GetScaleX(),transform->GetScaleY());
     }
+
 }
 
 void Inspector::SetSelectedGO(GameObject* new_go)
 {
-    current_go = new_go;
+    current_go = nullptr;
     name->setText(new_go->name);
     transform->SetPosition(new_go->pos.x(), new_go->pos.y());
     transform->SetScale(new_go->scale.x(), new_go->scale.y());
+    current_go = new_go;
 }
