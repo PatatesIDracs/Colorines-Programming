@@ -15,14 +15,19 @@ public:
     explicit Transform(QWidget *parent = 0);
     ~Transform();
 
-    void SetPosition(float x, float y);    
+    void SetPosition(double x, double y);
+    void SetScale(double x, double y);
 
-    float GetPosX();
-    float GetPosY();
+    double GetPosX();
+    double GetPosY();
+    double GetScaleX();
+    double GetScaleY();
 
     //Get UI elements
     QWidget* GetTranslationXUI();
     QWidget* GetTranslationYUI();
+    QWidget* GetScaleXUI();
+    QWidget* GetScaleYUI();
 
 private:
     Ui::Transform *ui;

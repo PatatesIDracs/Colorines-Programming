@@ -24,5 +24,11 @@ void GameObject::SetPos(float x, float y)
     pos.setX(x);
    // qDebug("Pos X: %f", pos.x());
     pos.setY(y);
-   // qDebug("Pos Y: %f", pos.y());
+    // qDebug("Pos Y: %f", pos.y());
+}
+
+void GameObject::SetScale(float x, float y)
+{
+    scale.setX(x);
+    scale.setY(y);
 }

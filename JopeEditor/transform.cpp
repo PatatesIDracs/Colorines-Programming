@@ -13,20 +13,36 @@ Transform::~Transform()
     delete ui;
 }
 
-void Transform::SetPosition(float x, float y)
+void Transform::SetScale(double x, double y)
+{
+    ui->scale_x->setValue(x);
+    ui->scale_y->setValue(y);
+}
+
+void Transform::SetPosition(double x, double y)
 {
     ui->translate_x->setValue(x);
     ui->translate_y->setValue(y);
 }
 
-float Transform::GetPosX()
+double Transform::GetPosX()
 {
     return ui->translate_x->value();
 }
 
-float Transform::GetPosY()
+double Transform::GetPosY()
 {
     return ui->translate_y->value();
+}
+
+double Transform::GetScaleX()
+{
+    return ui->scale_x->value();
+}
+
+double Transform::GetScaleY()
+{
+    return ui->scale_y->value();
 }
 
 QWidget *Transform::GetTranslationXUI()
@@ -37,4 +53,14 @@ QWidget *Transform::GetTranslationXUI()
 QWidget *Transform::GetTranslationYUI()
 {
     return ui->translate_y;
+}
+
+QWidget *Transform::GetScaleXUI()
+{
+    return ui->scale_x;
+}
+
+QWidget *Transform::GetScaleYUI()
+{
+    return  ui->scale_y;
 }

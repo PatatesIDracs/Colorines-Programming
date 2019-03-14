@@ -32,6 +32,9 @@ Inspector::Inspector(QWidget *parent) :
     //Slot connections
     connect(name,SIGNAL(textEdited(QString)),this, SLOT(TextChanged(QString)));
     connect(transform->GetTranslationXUI(), SIGNAL(valueChanged(double)), this, SLOT(TransformChanged()));
+    connect(transform->GetTranslationYUI(), SIGNAL(valueChanged(double)), this, SLOT(TransformChanged()));
+    connect(transform->GetScaleXUI(),SIGNAL(valueChanged(double)),this, SLOT(TransformChanged()));
+    connect(transform->GetScaleYUI(),SIGNAL(valueChanged(double)),this, SLOT(TransformChanged()));
 }
 
 Inspector::~Inspector()
@@ -40,10 +43,11 @@ Inspector::~Inspector()
 
 void Inspector::TextChanged(QString new_name)
 {
-    name->setText("This has changed");
-    layout->removeItem(spacer);
-    // layout->addWidget(curr_transform);
-    layout->addItem(spacer);
+    name->setText(new_name);
+    if(current_go != nullptr)
+    {
+        current_go->name = new_name;
+    }
 }
 
 void Inspector::TransformChanged()
@@ -52,6 +56,7 @@ void Inspector::TransformChanged()
     if(current_go != nullptr)
     {
         current_go->SetPos(transform->GetPosX(), transform->GetPosY());
+        current_go->SetScale(transform->GetScaleX(),transform->GetScaleY());
     }
 }
 
@@ -60,4 +65,5 @@ void Inspector::SetSelectedGO(GameObject* new_go)
     current_go = new_go;
     name->setText(new_go->name);
     transform->SetPosition(new_go->pos.x(), new_go->pos.y());
+    transform->SetScale(new_go->scale.x(), new_go->scale.y());
 }
