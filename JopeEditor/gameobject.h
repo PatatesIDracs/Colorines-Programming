@@ -5,6 +5,7 @@
 #include <QVector2D>
 
 class QPainter;
+class Renderer;
 
 enum ShapeType
 {
@@ -43,6 +44,7 @@ public:
     ShapeType type;
     QVector2D size;
 
+    Renderer* renderer = nullptr;
 };
 
 #endif // GAMEOBJECT_H

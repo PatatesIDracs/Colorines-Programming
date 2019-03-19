@@ -4,10 +4,12 @@
 #include <QWidget>
 
 class QLineEdit;
+class QPushButton;
 class Transform;
 class QVBoxLayout;
 class QSpacerItem;
 class GameObject;
+class Renderer;
 
 class Inspector : public QWidget
 {
@@ -21,7 +23,9 @@ public:
 
 public:
     QLineEdit* name;
+    QPushButton* add_renderer_butt;
     Transform* transform = nullptr;
+    Renderer* renderer = nullptr;
     QVBoxLayout* layout;
     QSpacerItem* spacer;
 
@@ -31,6 +35,7 @@ public slots:
 
     void TextChanged(QString new_name);
     void TransformChanged();
+    void AddRenderer();
 
 };
 

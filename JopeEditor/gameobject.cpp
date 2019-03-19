@@ -1,4 +1,5 @@
 #include "gameobject.h"
+#include "renderer.h"
 #include <QPainter>
 
 GameObject::GameObject(int i) : type(ELLIPSE_SHAPE)
@@ -16,6 +17,8 @@ GameObject::GameObject(int i) : type(ELLIPSE_SHAPE)
     size.setX(50);
     size.setY(50);
 
+    //Init Renderer
+   // renderer = new Renderer();
 }
 
 void GameObject::DrawGeo(QBrush &brush,QPen &pen)

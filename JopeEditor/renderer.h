@@ -6,12 +6,17 @@
 class QLabel;
 class QComboBox;
 class GameObject;
+class QVBoxLayout;
 
 class Renderer : public QWidget
 {
     Q_OBJECT
 public:
     explicit Renderer(QWidget *parent = nullptr);
+    ~Renderer();
+
+    void LabelInit();
+    void InitDefaultLayout();
 
 public:
     GameObject* current_go;
@@ -19,9 +24,9 @@ public:
 //UI Elements
     //Labels----
     QLabel* shape_label;
-    QLabel* height;
-    QLabel* width;
-    QLabel* radius;
+    QLabel* height_label;
+    QLabel* width_label;
+    QLabel* radius_label;
     QLabel* fill_color_label;
     QLabel* stroke_color_label;
     QLabel* stroke_thick_label;
@@ -30,7 +35,7 @@ public:
     //Selectors---
     QComboBox* shape_box;
 
-
+    QVBoxLayout* layout;
 signals:
 
 public slots:
