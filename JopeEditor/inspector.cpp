@@ -57,11 +57,14 @@ void Inspector::TextChanged(QString new_name)
 void Inspector::TransformChanged()
 {
     std::cout << "Transform Changed" << std::endl;
+
     if(current_go != nullptr)
     {
         current_go->SetPos(transform->GetPosX(), transform->GetPosY());
         current_go->SetScale(transform->GetScaleX(),transform->GetScaleY());
     }
+
+    emit SigGObjUpdate();
 
 }
 

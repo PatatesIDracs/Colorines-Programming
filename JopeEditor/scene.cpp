@@ -29,31 +29,6 @@ void Scene::paintEvent(QPaintEvent *)
 
     hierarchy->DrawHierarchy(this);
 
-    /*QBrush brush;
-    QPen pen;
+    std::cout << "Updated Scene" << std::endl;
 
-    //Brush/Pen configuration
-    brush.setColor(blueColor);
-    brush.setStyle(Qt::BrushStyle::SolidPattern);
-    pen.setStyle(Qt::PenStyle::NoPen);
-    painter.setBrush(brush);
-    painter.setPen(pen);
-
-    painter.drawRect(rect());
-
-    //Brush/Pen configuration
-    brush.setColor(whiteColor);
-    pen.setWidth(4);
-    pen.setColor(blackColor);
-    pen.setStyle(Qt::PenStyle::DashLine);
-    painter.setBrush(brush);
-    painter.setPen(pen);
-
-    int r = 64;
-    int w = r * 2;
-    int h = r * 2;
-    int x = rect().width() / 3 - r;
-    int y = rect().height() / 2 - r;
-    QRect circleRect(x,y,w,h);
-    painter.drawEllipse(circleRect);*/
 }

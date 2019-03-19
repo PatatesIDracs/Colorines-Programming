@@ -21,6 +21,10 @@ public:
 
     void SetSelectedGO(GameObject* new_go);
 
+signals:
+
+    void SigGObjUpdate();
+
 public:
     QLineEdit* name;
     QPushButton* add_renderer_butt;

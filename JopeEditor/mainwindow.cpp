@@ -37,7 +37,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Signals to update Scene, Inspector, etc.
     connect(hierarchy,SIGNAL(SigObjectAdded(GameObject*)), scene, SLOT(update()));
-
+    connect(inspector,SIGNAL(SigGObjUpdate()), scene, SLOT(update()));
 
     //Hide Icons from MenuBar
     qApp->instance()->setAttribute(Qt::AA_DontShowIconsInMenus, true);

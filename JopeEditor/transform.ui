@@ -24,10 +24,21 @@
       </widget>
      </item>
      <item>
-      <widget class="QDoubleSpinBox" name="translate_x"/>
+      <widget class="QDoubleSpinBox" name="translate_x">
+       <property name="decimals">
+        <number>2</number>
+       </property>
+       <property name="maximum">
+        <double>2000.000000000000000</double>
+       </property>
+      </widget>
      </item>
      <item>
-      <widget class="QDoubleSpinBox" name="translate_y"/>
+      <widget class="QDoubleSpinBox" name="translate_y">
+       <property name="maximum">
+        <double>2000.000000000000000</double>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>

@@ -38,6 +38,7 @@ void GameObject::SetPos(float x, float y)
    // qDebug("Pos X: %f", pos.x());
     pos.setY(y);
     // qDebug("Pos Y: %f", pos.y());
+
 }
 
 void GameObject::SetScale(float x, float y)
@@ -61,7 +62,6 @@ QRect GameObject::GetCircle() const
     int x = static_cast<int>(pos.x() - size.x()*scale.x());
     int y = static_cast<int>(pos.y() - size.x()*scale.x());
     int w = static_cast<int>(size.x()*2*scale.x());
-    //int h = static_cast<int>(size.x()*2*scale.x());
     return  QRect(x,y,w,w);
 }
 
