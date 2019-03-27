@@ -8,6 +8,8 @@
 #include <QSpacerItem>
 #include <QLineEdit>
 #include <QPushButton>
+#include <QComboBox>
+#include <QDoubleSpinBox>
 #include <iostream>
 
 
@@ -76,6 +78,9 @@ void Inspector::AddRenderer()
     {
         current_go->renderer = new Renderer();
         connect(current_go->renderer->shape_box, SIGNAL(currentIndexChanged(int)),this,SLOT(EmitUpdate()));
+        connect(current_go->renderer->height_box, SIGNAL(valueChanged(double)),this,SLOT(EmitUpdate()));
+        connect(current_go->renderer->width_box, SIGNAL(valueChanged(double)),this,SLOT(EmitUpdate()));
+        connect(current_go->renderer->radius_box, SIGNAL(valueChanged(double)),this,SLOT(EmitUpdate()));
         layout->removeItem(spacer);
         layout->removeWidget(add_renderer_butt);
         add_renderer_butt->hide();

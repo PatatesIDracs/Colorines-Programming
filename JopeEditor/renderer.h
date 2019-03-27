@@ -2,13 +2,15 @@
 #define RENDERER_H
 
 #include <QWidget>
-#include <QComboBox>
+
 
 class QLabel;
-//class QComboBox;
+class QComboBox;
+class QDoubleSpinBox;
 class GameObject;
 class QVBoxLayout;
 class QHBoxLayout;
+class QPushButton;
 
 class Renderer : public QWidget
 {
@@ -23,6 +25,9 @@ public:
 public:
     GameObject* current_go;
 
+    QColor fill_color;
+    QColor stroke_color;
+
 //UI Elements
     //Labels----
     QLabel* shape_label;
@@ -36,12 +41,19 @@ public:
 
     //Selectors---
     QComboBox* shape_box;
-   // QHBoxLayout* shape_layout;
+    QDoubleSpinBox* height_box;
+    QDoubleSpinBox* width_box;
+    QDoubleSpinBox* radius_box;
+    QPushButton* fill_color_box;
+    QPushButton* stroke_color_box;
 
     QVBoxLayout* layout;
 signals:
 
 public slots:
+    void SelectFillColor();
+    void SelectStrokeColor();
+
 };
 
 #endif // RENDERER_H

@@ -3,6 +3,10 @@
 #include <QPainter>
 #include <iostream>
 
+//Renderer includes (To read renderer data)
+#include <QComboBox>
+#include <QDoubleSpinBox>
+
 GameObject::GameObject(int i) : type(ELLIPSE_SHAPE)
 {
     name = "New GameObject ";
@@ -54,20 +58,19 @@ ShapeType GameObject::GetShape() const
     {
         return (ShapeType)renderer->shape_box->currentData().toInt();
     }
-
     return UNKNOWN_SHAPE;
 }
 
 QRect GameObject::GetRect() const
 {
-    return QRect(pos.x(),pos.y(), size.x()*scale.x(), size.y()*scale.y());
+    return QRect(pos.x(),pos.y(), GetWidth()*scale.x(), GetHeight()*scale.y());
 }
 
 QRect GameObject::GetCircle() const
 {
     int x = static_cast<int>(pos.x() - size.x()*scale.x());
     int y = static_cast<int>(pos.y() - size.x()*scale.x());
-    int w = static_cast<int>(size.x()*2*scale.x());
+    int w = static_cast<int>(GetRadius()*2*scale.x());
     return  QRect(x,y,w,w);
 }
 
@@ -79,4 +82,41 @@ QRect GameObject::GetEllipse() const
     int h = static_cast<int>(size.x()*scale.y())*2;
     return  QRect(x,y,w,h);
 
+}
+
+QColor GameObject::GetFillColor() const
+{
+    return renderer->fill_color;
+}
+
+QColor GameObject::GetStrokeColor() const
+{
+    return  renderer->stroke_color;
+}
+
+float GameObject::GetHeight() const
+{
+    if(renderer != nullptr)
+    {
+        return (float)renderer->height_box->value();
+    }
+    return 0.f;
+}
+
+float GameObject::GetWidth() const
+{
+    if(renderer != nullptr)
+    {
+        return (float)renderer->width_box->value();
+    }
+    return 0.f;
+}
+
+float GameObject::GetRadius() const
+{
+    if(renderer != nullptr)
+    {
+        return (float)renderer->radius_box->value();
+    }
+    return 0.f;
 }

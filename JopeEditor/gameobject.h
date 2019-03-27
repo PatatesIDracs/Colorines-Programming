@@ -33,6 +33,12 @@ public:
     QRect GetRect() const;
     QRect GetCircle() const;
     QRect GetEllipse() const;
+    QColor GetFillColor() const;
+    QColor GetStrokeColor() const;
+
+    float GetHeight() const;
+    float GetWidth() const;
+    float GetRadius() const;
 
 public:
     // Transform
