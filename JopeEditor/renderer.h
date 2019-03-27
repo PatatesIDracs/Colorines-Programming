@@ -2,11 +2,13 @@
 #define RENDERER_H
 
 #include <QWidget>
+#include <QComboBox>
 
 class QLabel;
-class QComboBox;
+//class QComboBox;
 class GameObject;
 class QVBoxLayout;
+class QHBoxLayout;
 
 class Renderer : public QWidget
 {
@@ -15,7 +17,7 @@ public:
     explicit Renderer(QWidget *parent = nullptr);
     ~Renderer();
 
-    void LabelInit();
+    void Init();
     void InitDefaultLayout();
 
 public:
@@ -34,6 +36,7 @@ public:
 
     //Selectors---
     QComboBox* shape_box;
+   // QHBoxLayout* shape_layout;
 
     QVBoxLayout* layout;
 signals:

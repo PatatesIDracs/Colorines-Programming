@@ -75,6 +75,7 @@ void Inspector::AddRenderer()
     if(current_go->renderer == nullptr)
     {
         current_go->renderer = new Renderer();
+        connect(current_go->renderer->shape_box, SIGNAL(currentIndexChanged(int)),this,SLOT(EmitUpdate()));
         layout->removeItem(spacer);
         layout->removeWidget(add_renderer_butt);
         add_renderer_butt->hide();
@@ -83,13 +84,26 @@ void Inspector::AddRenderer()
     }
 }
 
+void Inspector::EmitUpdate()
+{
+    emit SigGObjUpdate();
+}
+
 void Inspector::SetSelectedGO(GameObject* new_go)
 {
-    if(current_go != nullptr && current_go->renderer != nullptr)
+    if(current_go != nullptr)
     {
         layout->removeItem(spacer);
-        layout->removeWidget(current_go->renderer);
-        current_go->renderer->hide();
+        if(current_go->renderer != nullptr)
+        {
+            layout->removeWidget(current_go->renderer);
+            current_go->renderer->hide();
+        }
+        else
+        {
+         layout->removeWidget(add_renderer_butt);
+         add_renderer_butt->hide();
+        }
         layout->addItem(spacer);
     }
     current_go = nullptr;
@@ -101,6 +115,7 @@ void Inspector::SetSelectedGO(GameObject* new_go)
     {
         layout->removeItem(spacer);
         layout->addWidget(current_go->renderer);
+        current_go->renderer->show();
         layout->addItem(spacer);
     }
     else

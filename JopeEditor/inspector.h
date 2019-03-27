@@ -40,6 +40,7 @@ public slots:
     void TextChanged(QString new_name);
     void TransformChanged();
     void AddRenderer();
+    void EmitUpdate();
 
 };
 

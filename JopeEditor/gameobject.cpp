@@ -1,6 +1,7 @@
 #include "gameobject.h"
 #include "renderer.h"
 #include <QPainter>
+#include <iostream>
 
 GameObject::GameObject(int i) : type(ELLIPSE_SHAPE)
 {
@@ -49,7 +50,12 @@ void GameObject::SetScale(float x, float y)
 
 ShapeType GameObject::GetShape() const
 {
-    return type;
+    if(renderer != nullptr)
+    {
+        return (ShapeType)renderer->shape_box->currentData().toInt();
+    }
+
+    return UNKNOWN_SHAPE;
 }
 
 QRect GameObject::GetRect() const
