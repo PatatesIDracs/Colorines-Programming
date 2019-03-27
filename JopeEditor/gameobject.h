@@ -35,6 +35,8 @@ public:
     QRect GetEllipse() const;
     QColor GetFillColor() const;
     QColor GetStrokeColor() const;
+    float GetStrokeThickness() const;
+    Qt::PenStyle GetStrokeStyle() const;
 
     float GetHeight() const;
     float GetWidth() const;

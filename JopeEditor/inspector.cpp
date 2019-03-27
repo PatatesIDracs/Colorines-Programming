@@ -81,6 +81,10 @@ void Inspector::AddRenderer()
         connect(current_go->renderer->height_box, SIGNAL(valueChanged(double)),this,SLOT(EmitUpdate()));
         connect(current_go->renderer->width_box, SIGNAL(valueChanged(double)),this,SLOT(EmitUpdate()));
         connect(current_go->renderer->radius_box, SIGNAL(valueChanged(double)),this,SLOT(EmitUpdate()));
+        connect(current_go->renderer->fill_color_box, SIGNAL(clicked()),this,SLOT(EmitUpdate()));
+        connect(current_go->renderer->stroke_color_box, SIGNAL(clicked()),this,SLOT(EmitUpdate()));
+        connect(current_go->renderer->stroke_thick_box, SIGNAL(valueChanged(double)),this,SLOT(EmitUpdate()));
+        connect(current_go->renderer->stroke_style_box, SIGNAL(currentIndexChanged(int)),this,SLOT(EmitUpdate()));
         layout->removeItem(spacer);
         layout->removeWidget(add_renderer_butt);
         add_renderer_butt->hide();

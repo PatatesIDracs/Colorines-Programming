@@ -46,8 +46,14 @@ public:
     QDoubleSpinBox* radius_box;
     QPushButton* fill_color_box;
     QPushButton* stroke_color_box;
+    QDoubleSpinBox* stroke_thick_box;
+    QComboBox* stroke_style_box;
 
     QVBoxLayout* layout;
+
+public:
+    Qt::PenStyle GetPenStyle() const;
+
 signals:
 
 public slots:

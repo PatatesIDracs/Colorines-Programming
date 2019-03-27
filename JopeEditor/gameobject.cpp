@@ -94,6 +94,17 @@ QColor GameObject::GetStrokeColor() const
     return  renderer->stroke_color;
 }
 
+float GameObject::GetStrokeThickness() const
+{
+    return  renderer->stroke_thick_box->value();
+}
+
+Qt::PenStyle GameObject::GetStrokeStyle() const
+{
+    return  renderer->GetPenStyle();
+}
+
+
 float GameObject::GetHeight() const
 {
     if(renderer != nullptr)
