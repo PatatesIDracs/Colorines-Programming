@@ -46,6 +46,7 @@ private:
 
     GameObject* selected;
 
+    uint count;
 private:
     void PrintObjects();
 

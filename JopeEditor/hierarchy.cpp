@@ -7,7 +7,7 @@
 
 Hierarchy::Hierarchy(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::Hierarchy)
+    ui(new Ui::Hierarchy), count(0)
 {
     ui->setupUi(this);
 
@@ -59,17 +59,20 @@ void Hierarchy::DrawHierarchy(QWidget* scene)
 
 void Hierarchy::CreateNewGO()
 {
+    count++;
     int numObj = objects.size();
 
-    GameObject* temp = new GameObject(numObj);
-    objects.push_back(temp);
-    inspector->SetSelectedGO(temp);
+    selected = new GameObject(count);
+    objects.push_back(selected);
 
-    ui->listWidget->addItem(temp->name);
+    inspector->SetSelectedGO(selected);
+
+    ui->listWidget->addItem(selected->name);
     ui->listWidget->scrollToBottom();
+    ui->listWidget->currentRowChanged(numObj);
     ui->listWidget->setCurrentRow(numObj);
 
-    emit SigHierarchyUpdate(temp);
+    emit SigHierarchyUpdate(selected);
 }
 
 void Hierarchy::RemoveGO()
@@ -79,8 +82,10 @@ void Hierarchy::RemoveGO()
         if(objects[i] == selected)
         {
             objects.remove(i);
-            delete ui->listWidget->takeItem(ui->listWidget->row(ui->listWidget->currentItem()));
-            selected =nullptr;
+            delete ui->listWidget->takeItem(i);
+
+            (i > 0) ? (i < objects.size())? selected = objects[i]: selected = objects[i-1] : selected = nullptr;
+
             break;
         }
     }
@@ -112,7 +117,10 @@ void Hierarchy::CreateNewScene()
     // Clear listWidget items
     ui->listWidget->clear();
 
-    inspector->SetSelectedGO(nullptr);
+    selected = nullptr;
+    //inspector->SetSelectedGO(nullptr);
+
+    count = 0;
 
     emit SigHierarchyUpdate(nullptr);
 }
