@@ -24,7 +24,7 @@ public:
 
 signals:
 
-    void SigObjectAdded(GameObject*);
+    void SigHierarchyUpdate(GameObject*);
 
 public slots:
     void CreateNewGO();

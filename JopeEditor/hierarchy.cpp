@@ -37,6 +37,7 @@ void Hierarchy::DrawHierarchy(QWidget* scene)
     {
         drawnObject = objects[i];
         drawnObject->DrawGeo(brush, pen);
+
         painter.setBrush(brush);
         painter.setPen(pen);
 
@@ -62,11 +63,13 @@ void Hierarchy::CreateNewGO()
 
     GameObject* temp = new GameObject(numObj);
     objects.push_back(temp);
+    inspector->SetSelectedGO(temp);
+
     ui->listWidget->addItem(temp->name);
+    ui->listWidget->scrollToBottom();
+    ui->listWidget->setCurrentRow(numObj);
 
-    emit SigObjectAdded(temp);
-
-
+    emit SigHierarchyUpdate(temp);
 }
 
 void Hierarchy::RemoveGO()
@@ -81,7 +84,7 @@ void Hierarchy::RemoveGO()
             break;
         }
     }
-    emit SigObjectAdded(nullptr);
+    emit SigHierarchyUpdate(nullptr);
 }
 
 void Hierarchy::OnItemClicked()
@@ -108,6 +111,10 @@ void Hierarchy::CreateNewScene()
 
     // Clear listWidget items
     ui->listWidget->clear();
+
+    inspector->SetSelectedGO(nullptr);
+
+    emit SigHierarchyUpdate(nullptr);
 }
 
 void Hierarchy::OpenScene()
@@ -116,11 +123,15 @@ void Hierarchy::OpenScene()
 
     // Open file widget
 
+    emit SigHierarchyUpdate(nullptr);
 }
 
 void Hierarchy::SaveScene()
 {
     std::cout << "Save Scene" << std::endl;
+
+    // SaveScene
+
 }
 
 void Hierarchy::UndoAction()

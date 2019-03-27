@@ -36,7 +36,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionRedo, SIGNAL(triggered()), hierarchy, SLOT(RedoAction()));
 
     //Signals to update Scene, Inspector, etc.
-    connect(hierarchy,SIGNAL(SigObjectAdded(GameObject*)), scene, SLOT(update()));
+    connect(hierarchy,SIGNAL(SigHierarchyUpdate(GameObject*)), scene, SLOT(update()));
     connect(inspector,SIGNAL(SigGObjUpdate()), scene, SLOT(update()));
 
     //Hide Icons from MenuBar
