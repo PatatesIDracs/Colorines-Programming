@@ -29,12 +29,12 @@ GameObject::GameObject(int i) : type(ELLIPSE_SHAPE)
 
 void GameObject::DrawGeo(QBrush &brush,QPen &pen)
 {
-    brush.setColor(QColor::fromRgb(127,190,220));
+    brush.setColor(GetFillColor());
     brush.setStyle(Qt::BrushStyle::SolidPattern);
 
-    pen.setWidth(4);
-    pen.setColor(QColor::fromRgb(127,190,220));
-    pen.setStyle(Qt::PenStyle::NoPen);
+    pen.setWidth(GetStrokeThickness());
+    pen.setColor(GetStrokeColor());
+    pen.setStyle(GetStrokeStyle());
 
 }
 
@@ -111,22 +111,39 @@ QRect GameObject::GetEllipse() const
 
 QColor GameObject::GetFillColor() const
 {
+    if(renderer != nullptr)
+    {
     return renderer->fill_color;
+    }
+    return Qt::blue;
+
 }
 
 QColor GameObject::GetStrokeColor() const
 {
+    if(renderer != nullptr)
+    {
     return  renderer->stroke_color;
+    }
+    return Qt::black;
 }
 
 float GameObject::GetStrokeThickness() const
 {
+    if(renderer != nullptr)
+    {
     return  renderer->stroke_thick_box->value();
+    }
+    return 0.f;
 }
 
 Qt::PenStyle GameObject::GetStrokeStyle() const
 {
+    if(renderer != nullptr)
+    {
     return  renderer->GetPenStyle();
+    }
+    return Qt::SolidLine;
 }
 
 float GameObject::GetHeight() const
