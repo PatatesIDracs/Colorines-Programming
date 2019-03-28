@@ -124,6 +124,51 @@ void Renderer::InitDefaultValues()
     radius_box->setValue(50.f);
 }
 
+void Renderer::Save(QDataStream &outstream)
+{
+    //Shape
+    outstream << shape_box->currentIndex();
+    //Height
+    outstream << height_box->value();
+    //Width
+    outstream << width_box->value();
+    //Radius
+    outstream << radius_box->value();
+    //FillColor
+    outstream << fill_color;
+    //StrokeColor
+    outstream << stroke_color;
+    //StrokeThickness
+    outstream << stroke_thick_box->value();
+    //StrokeStyle
+    outstream << stroke_style_box->currentIndex();
+}
+
+void Renderer::Load(QDataStream &instream)
+{
+    int temp_index = 0;
+    //Shape
+    instream >> temp_index;
+    shape_box->setCurrentIndex(temp_index);
+
+    //Height, width and radius
+    double temp;
+    instream >> temp;
+    height_box->setValue(temp);
+    instream >> temp;
+    width_box->setValue(temp);
+    instream >> temp;
+    radius_box->setValue(temp);
+
+    instream >> fill_color;
+    instream >> stroke_color;
+    instream >> temp;
+    stroke_thick_box->setValue(temp);
+    instream >> temp_index;
+    stroke_style_box->setCurrentIndex(temp_index);
+
+}
+
 Qt::PenStyle Renderer::GetPenStyle() const
 {
     return (Qt::PenStyle)stroke_style_box->currentData().toInt();

@@ -23,6 +23,9 @@ public:
     void InitDefaultLayout();
     void InitDefaultValues();
 
+    void Save(QDataStream &outstream);
+    void Load(QDataStream &instream);
+
 public:
     GameObject* current_go;
 

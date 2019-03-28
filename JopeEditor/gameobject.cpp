@@ -46,6 +46,8 @@ void GameObject::Save(QDataStream &outstream)
     outstream << pos;
     outstream << scale;
     outstream << size;
+
+    renderer->Save(outstream);
 }
 
 void GameObject::Load(QDataStream &stream)
@@ -59,6 +61,9 @@ void GameObject::Load(QDataStream &stream)
     stream >> pos;
     stream >> scale;
     stream >> size;
+
+    renderer = new Renderer();
+    renderer->Load(stream);
 }
 
 
