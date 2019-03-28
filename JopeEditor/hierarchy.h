@@ -49,6 +49,7 @@ private:
     uint count;
 private:
     void PrintObjects();
+    void ConnectGameObject(GameObject* target);
 
 };
 

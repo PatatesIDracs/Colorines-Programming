@@ -27,7 +27,6 @@ signals:
 
 public:
     QLineEdit* name;
-    QPushButton* add_renderer_butt;
     Transform* transform = nullptr;
     Renderer* renderer = nullptr;
     QVBoxLayout* layout;
@@ -39,7 +38,6 @@ public slots:
 
     void TextChanged(QString new_name);
     void TransformChanged();
-    void AddRenderer();
     void EmitUpdate();
 
 };

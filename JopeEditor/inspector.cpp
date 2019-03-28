@@ -19,7 +19,6 @@ Inspector::Inspector(QWidget *parent) :
 
     //Subwidgets --> Add transform and others
     name = new QLineEdit();
-    add_renderer_butt = new QPushButton("Add renderer");
     spacer = new QSpacerItem(1,1,QSizePolicy::Expanding,QSizePolicy::Expanding);
     transform = new Transform();
 
@@ -29,14 +28,12 @@ Inspector::Inspector(QWidget *parent) :
     layout = new QVBoxLayout;
     layout->addWidget(name);
     layout->addWidget(transform);
-    layout->addWidget(add_renderer_butt);
     layout->addItem(spacer);
     setLayout(layout);
 
 
     //Slot connections
     connect(name,SIGNAL(textEdited(QString)),this, SLOT(TextChanged(QString)));
-    connect(add_renderer_butt, SIGNAL(pressed()),this,SLOT(AddRenderer()));
     connect(transform->GetTranslationXUI(), SIGNAL(valueChanged(double)), this, SLOT(TransformChanged()));
     connect(transform->GetTranslationYUI(), SIGNAL(valueChanged(double)), this, SLOT(TransformChanged()));
     connect(transform->GetScaleXUI(),SIGNAL(valueChanged(double)),this, SLOT(TransformChanged()));
@@ -70,29 +67,6 @@ void Inspector::TransformChanged()
 
 }
 
-void Inspector::AddRenderer()
-{
-    if(current_go == nullptr)
-        return;
-    if(current_go->renderer == nullptr)
-    {
-        current_go->renderer = new Renderer();
-        connect(current_go->renderer->shape_box, SIGNAL(currentIndexChanged(int)),this,SLOT(EmitUpdate()));
-        connect(current_go->renderer->height_box, SIGNAL(valueChanged(double)),this,SLOT(EmitUpdate()));
-        connect(current_go->renderer->width_box, SIGNAL(valueChanged(double)),this,SLOT(EmitUpdate()));
-        connect(current_go->renderer->radius_box, SIGNAL(valueChanged(double)),this,SLOT(EmitUpdate()));
-        connect(current_go->renderer->fill_color_box, SIGNAL(clicked()),this,SLOT(EmitUpdate()));
-        connect(current_go->renderer->stroke_color_box, SIGNAL(clicked()),this,SLOT(EmitUpdate()));
-        connect(current_go->renderer->stroke_thick_box, SIGNAL(valueChanged(double)),this,SLOT(EmitUpdate()));
-        connect(current_go->renderer->stroke_style_box, SIGNAL(currentIndexChanged(int)),this,SLOT(EmitUpdate()));
-        layout->removeItem(spacer);
-        layout->removeWidget(add_renderer_butt);
-        add_renderer_butt->hide();
-        layout->addWidget(current_go->renderer);
-        layout->addItem(spacer);
-    }
-}
-
 void Inspector::EmitUpdate()
 {
     emit SigGObjUpdate();
@@ -108,13 +82,7 @@ void Inspector::SetSelectedGO(GameObject* new_go)
             layout->removeWidget(current_go->renderer);
             current_go->renderer->hide();
         }
-        else
-        {
-         layout->removeWidget(add_renderer_butt);
-         add_renderer_butt->hide();
-        }
         layout->addItem(spacer);
-
         current_go = nullptr;
     }
 
@@ -129,13 +97,6 @@ void Inspector::SetSelectedGO(GameObject* new_go)
             layout->removeItem(spacer);
             layout->addWidget(current_go->renderer);
             current_go->renderer->show();
-            layout->addItem(spacer);
-        }
-        else
-        {
-            layout->removeItem(spacer);
-            layout->addWidget(add_renderer_butt);
-            add_renderer_butt->show();
             layout->addItem(spacer);
         }
     }

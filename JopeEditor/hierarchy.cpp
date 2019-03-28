@@ -6,6 +6,9 @@
 #include <QFileDialog>
 #include <QDir>
 #include "QPainter"
+#include "renderer.h"
+#include <QDoubleSpinBox>
+#include <QComboBox>
 
 Hierarchy::Hierarchy(QWidget *parent) :
     QWidget(parent),
@@ -66,8 +69,11 @@ void Hierarchy::CreateNewGO()
 
     selected = new GameObject(count);
     objects.push_back(selected);
+    selected->renderer = new Renderer();
+
 
     inspector->SetSelectedGO(selected);
+    ConnectGameObject(selected);
 
     ui->listWidget->addItem(selected->name);
     ui->listWidget->scrollToBottom();
@@ -176,8 +182,8 @@ void Hierarchy::OpenScene()
         ui->listWidget->setCurrentRow(i-1);
 
         selected = objects[i-1];
-        emit SigHierarchyUpdate(selected);
         inspector->SetSelectedGO(selected);
+        ConnectGameObject(selected);
     }
 
     f.close();
@@ -226,4 +232,16 @@ void Hierarchy::UndoAction()
 void Hierarchy::RedoAction()
 {
     std::cout << "Redo Action" << std::endl;
+}
+
+void Hierarchy::ConnectGameObject(GameObject *target)
+{
+    connect(target->renderer->shape_box, SIGNAL(currentIndexChanged(int)),inspector,SLOT(EmitUpdate()));
+    connect(target->renderer->height_box, SIGNAL(valueChanged(double)),inspector,SLOT(EmitUpdate()));
+    connect(target->renderer->width_box, SIGNAL(valueChanged(double)),inspector,SLOT(EmitUpdate()));
+    connect(target->renderer->radius_box, SIGNAL(valueChanged(double)),inspector,SLOT(EmitUpdate()));
+    connect(target->renderer->fill_color_box, SIGNAL(clicked()),inspector,SLOT(EmitUpdate()));
+    connect(target->renderer->stroke_color_box, SIGNAL(clicked()),inspector,SLOT(EmitUpdate()));
+    connect(target->renderer->stroke_thick_box, SIGNAL(valueChanged(double)),inspector,SLOT(EmitUpdate()));
+    connect(target->renderer->stroke_style_box, SIGNAL(currentIndexChanged(int)),inspector,SLOT(EmitUpdate()));
 }
