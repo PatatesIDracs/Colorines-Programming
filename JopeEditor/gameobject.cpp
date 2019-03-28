@@ -1,6 +1,7 @@
 #include "gameobject.h"
 #include "renderer.h"
 #include <QPainter>
+#include <QDataStream>
 #include <iostream>
 
 //Renderer includes (To read renderer data)
@@ -36,6 +37,30 @@ void GameObject::DrawGeo(QBrush &brush,QPen &pen)
     pen.setStyle(Qt::PenStyle::NoPen);
 
 }
+
+void GameObject::Save(QDataStream &outstream)
+{
+    outstream << name;
+    outstream << static_cast<int>(type);
+
+    outstream << pos;
+    outstream << scale;
+    outstream << size;
+}
+
+void GameObject::Load(QDataStream &stream)
+{
+    stream >> name;
+
+    int i = 0;
+    stream >> i;
+    type = static_cast<ShapeType>(i);
+
+    stream >> pos;
+    stream >> scale;
+    stream >> size;
+}
+
 
 void GameObject::SetPos(float x, float y)
 {
@@ -103,7 +128,6 @@ Qt::PenStyle GameObject::GetStrokeStyle() const
 {
     return  renderer->GetPenStyle();
 }
-
 
 float GameObject::GetHeight() const
 {

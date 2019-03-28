@@ -113,6 +113,7 @@ void Hierarchy::OnItemClicked()
 void Hierarchy::CreateNewScene()
 {
     // Clear objects QVector
+    inspector->SetSelectedGO(nullptr);
     qDeleteAll(objects.begin(), objects.end());
     objects.clear();
 
@@ -120,7 +121,6 @@ void Hierarchy::CreateNewScene()
     ui->listWidget->clear();
 
     selected = nullptr;
-    //inspector->SetSelectedGO(nullptr);
 
     count = 0;
 
@@ -131,6 +131,7 @@ void Hierarchy::OpenScene()
 {
     std::cout << "Open Scene" << std::endl;
 
+    inspector->SetSelectedGO(nullptr);
     qDeleteAll(objects.begin(), objects.end());
     objects.clear();
 
@@ -155,6 +156,7 @@ void Hierarchy::OpenScene()
     QString text;
     int numObj;
     stream >> text;
+    stream >> count;
     stream >> numObj;
 
     if(numObj > 0){
@@ -163,15 +165,15 @@ void Hierarchy::OpenScene()
         for(; i < numObj; i++)
         {
             GameObject* temp = new GameObject(i);
-            stream >> temp->name;
+
+            temp->Load(stream);
 
             objects.push_back(temp);
             ui->listWidget->addItem(temp->name);
         }
-
         ui->listWidget->scrollToBottom();
-        ui->listWidget->currentRowChanged(i);
-        ui->listWidget->setCurrentRow(i);
+        ui->listWidget->currentRowChanged(i-1);
+        ui->listWidget->setCurrentRow(i-1);
 
         selected = objects[i-1];
         emit SigHierarchyUpdate(selected);
@@ -202,13 +204,14 @@ void Hierarchy::SaveScene()
 
     QDataStream outstream(&f);
     outstream << QString("Scene Gameobjects");
+    outstream << count;
     outstream << objects.size();
 
     outstream.setVersion(QDataStream::Qt_4_0);
 
     for(uint i = 0; i < objects.size(); i++)
     {
-        outstream << objects[i]->name;
+        objects[i]->Save(outstream);
     }
 
     f.close();

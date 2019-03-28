@@ -114,25 +114,30 @@ void Inspector::SetSelectedGO(GameObject* new_go)
          add_renderer_butt->hide();
         }
         layout->addItem(spacer);
+
+        current_go = nullptr;
     }
-    current_go = nullptr;
-    name->setText(new_go->name);
-    transform->SetPosition(new_go->pos.x(), new_go->pos.y());
-    transform->SetScale(new_go->scale.x(), new_go->scale.y());
-    current_go = new_go;
-    if(current_go->renderer != nullptr)
+
+    if(new_go != nullptr)
     {
-        layout->removeItem(spacer);
-        layout->addWidget(current_go->renderer);
-        current_go->renderer->show();
-        layout->addItem(spacer);
-    }
-    else
-    {
-        layout->removeItem(spacer);
-        layout->addWidget(add_renderer_butt);
-        add_renderer_butt->show();
-        layout->addItem(spacer);
+        name->setText(new_go->name);
+        transform->SetPosition(new_go->pos.x(), new_go->pos.y());
+        transform->SetScale(new_go->scale.x(), new_go->scale.y());
+        current_go = new_go;
+        if(current_go->renderer != nullptr)
+        {
+            layout->removeItem(spacer);
+            layout->addWidget(current_go->renderer);
+            current_go->renderer->show();
+            layout->addItem(spacer);
+        }
+        else
+        {
+            layout->removeItem(spacer);
+            layout->addWidget(add_renderer_butt);
+            add_renderer_butt->show();
+            layout->addItem(spacer);
+        }
     }
 
 }

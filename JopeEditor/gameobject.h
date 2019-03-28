@@ -4,8 +4,11 @@
 #include <QString>
 #include <QVector2D>
 
+class QDataStream;
 class QPainter;
 class Renderer;
+
+
 
 enum ShapeType
 {
@@ -23,6 +26,9 @@ public:
     GameObject(int i);
 
     void DrawGeo(QBrush &brush, QPen &pen);
+
+    void Save(QDataStream &stream);
+    void Load(QDataStream &stream);
 
     // Transform Methods
     void SetPos(float x, float y);
