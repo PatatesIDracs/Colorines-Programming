@@ -15,6 +15,7 @@ Renderer::Renderer(QWidget *parent) :
 
     Init();
     InitDefaultLayout();
+    InitDefaultValues();
 
     connect(fill_color_box, SIGNAL(released()),this, SLOT(SelectFillColor()));
     connect(stroke_color_box, SIGNAL(released()),this, SLOT(SelectStrokeColor()));
@@ -103,6 +104,24 @@ void Renderer::InitDefaultLayout()
       layout->addLayout(stroke_style_layout);
 
       setLayout(layout);
+}
+
+void Renderer::InitDefaultValues()
+{
+    fill_color = Qt::blue;
+    QString bg_color = QString("background-color:%1").arg(fill_color.name());
+    fill_color_box->setStyleSheet(bg_color);
+    fill_color_box->clicked();
+
+    stroke_color = Qt::black;
+    bg_color = QString("background-color:%1").arg(stroke_color.name());
+    stroke_color_box->setStyleSheet(bg_color);
+    stroke_color_box->clicked();
+
+    shape_box->setCurrentIndex(2);//Rect
+    height_box->setValue(50.f);
+    width_box->setValue(50.f);
+    radius_box->setValue(50.f);
 }
 
 Qt::PenStyle Renderer::GetPenStyle() const

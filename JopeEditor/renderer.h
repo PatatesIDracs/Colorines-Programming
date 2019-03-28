@@ -21,6 +21,7 @@ public:
 
     void Init();
     void InitDefaultLayout();
+    void InitDefaultValues();
 
 public:
     GameObject* current_go;
