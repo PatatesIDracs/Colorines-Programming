@@ -4,14 +4,12 @@ Authors: Joan Pareja, Pere Rifà
 
 # Features
 ## General
-**Create new scene:** Create a new blank scene, discarding the current one.      
-![New_scene_filemenu](https://github.com/PatatesIDracs/Colorines-Programming/blob/master/Images/NewScene_FileMenu.PNG)
+![FileMenu](https://github.com/PatatesIDracs/Colorines-Programming/blob/master/Images/FileMenu.PNG)      
+**New scene:** Create a new blank scene, discarding the current one.      
 ![New_scene_toolbar](https://github.com/PatatesIDracs/Colorines-Programming/blob/master/Images/NewScene_Toolbar.PNG)      
-**Load scene:** Load any .jope scene into the editor (it will discard the current scene).      
-![Load_scene_filemenu](https://github.com/PatatesIDracs/Colorines-Programming/blob/master/Images/LoadScene_FileMenu.PNG)
+**Open scene:** Load any .jope scene into the editor (it will discard the current scene).      
 ![Load_scene_toolbar](https://github.com/PatatesIDracs/Colorines-Programming/blob/master/Images/LoadScene_Toolbar.PNG)    
 **Save scene:** Save the current scene into a .jope file.       
-![Save_scene_filemenu](https://github.com/PatatesIDracs/Colorines-Programming/blob/master/Images/SaveScene_FileMenu.PNG)
 ![Save_scene_toolbar](https://github.com/PatatesIDracs/Colorines-Programming/blob/master/Images/SaveScene_Toolbar.PNG)      
    
 
