@@ -10,6 +10,7 @@ class QDoubleSpinBox;
 class GameObject;
 class QVBoxLayout;
 class QHBoxLayout;
+class QGroupBox;
 class QPushButton;
 
 class Renderer : public QWidget
@@ -25,6 +26,7 @@ public:
 
     void Save(QDataStream &outstream);
     void Load(QDataStream &instream);
+
 
 public:
     GameObject* current_go;
@@ -54,6 +56,13 @@ public:
     QComboBox* stroke_style_box;
 
     QVBoxLayout* layout;
+    QGroupBox* renderer_group;
+    QVBoxLayout* layout_general;
+
+
+    //Test things
+    QHBoxLayout* height_layout;
+    QHBoxLayout* width_layout;
 
 public:
     Qt::PenStyle GetPenStyle() const;
@@ -63,6 +72,7 @@ signals:
 public slots:
     void SelectFillColor();
     void SelectStrokeColor();
+    void ChangeShapeUI();
 
 };
 

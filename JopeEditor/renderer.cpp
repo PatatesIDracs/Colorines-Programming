@@ -8,6 +8,8 @@
 #include <QDoubleSpinBox>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#include <QGroupBox>
+#include <iostream>
 
 Renderer::Renderer(QWidget *parent) :
     QWidget(parent)
@@ -19,10 +21,20 @@ Renderer::Renderer(QWidget *parent) :
 
     connect(fill_color_box, SIGNAL(released()),this, SLOT(SelectFillColor()));
     connect(stroke_color_box, SIGNAL(released()),this, SLOT(SelectStrokeColor()));
+    connect(shape_box, SIGNAL(currentIndexChanged(int)),this,SLOT(ChangeShapeUI()));
 }
 
 Renderer::~Renderer()
 {
+    //Disconnect all signals
+    disconnect(shape_box, nullptr,nullptr,nullptr);
+    disconnect(height_box, nullptr,nullptr,nullptr);
+    disconnect(width_box, nullptr,nullptr,nullptr);
+    disconnect(radius_box, nullptr,nullptr,nullptr);
+    disconnect(fill_color_box, nullptr,nullptr,nullptr);
+    disconnect(stroke_color_box, nullptr,nullptr,nullptr);
+    disconnect(stroke_thick_box, nullptr,nullptr,nullptr);
+    disconnect(stroke_style_box, nullptr,nullptr,nullptr);
 }
 
 void Renderer::Init()
@@ -66,20 +78,21 @@ void Renderer::Init()
 
 void Renderer::InitDefaultLayout()
 {
+      renderer_group = new QGroupBox("Renderer");
       layout = new QVBoxLayout();
       QHBoxLayout* shape_layout = new QHBoxLayout();
       shape_layout->addWidget(shape_label);
       shape_layout->addWidget(shape_box);
       layout->addLayout(shape_layout);
 
-      QHBoxLayout* height_layout = new QHBoxLayout();
-      QHBoxLayout* width_layout = new QHBoxLayout();
-      height_layout->addWidget(height_label);
-      height_layout->addWidget(height_box);
+      width_layout = new QHBoxLayout();
+      height_layout = new QHBoxLayout();
       width_layout->addWidget(width_label);
       width_layout->addWidget(width_box);
-      layout->addLayout(height_layout);
+      height_layout->addWidget(height_label);
+      height_layout->addWidget(height_box);
       layout->addLayout(width_layout);
+      layout->addLayout(height_layout);
 
       QHBoxLayout* radius_layout = new QHBoxLayout();
       radius_layout->addWidget(radius_label);
@@ -103,7 +116,10 @@ void Renderer::InitDefaultLayout()
       layout->addLayout(stroke_thick_layout);
       layout->addLayout(stroke_style_layout);
 
-      setLayout(layout);
+      renderer_group->setLayout(layout);
+      layout_general = new QVBoxLayout();
+      layout_general->addWidget(renderer_group);
+      setLayout(layout_general);
 }
 
 void Renderer::InitDefaultValues()
@@ -166,6 +182,70 @@ void Renderer::Load(QDataStream &instream)
     stroke_thick_box->setValue(temp);
     instream >> temp_index;
     stroke_style_box->setCurrentIndex(temp_index);
+
+}
+
+void Renderer::ChangeShapeUI()
+{
+    switch ((ShapeType)shape_box->currentData().toInt())
+    {
+    case POINT_SHAPE:
+        //Hide
+        radius_label->hide();
+        radius_box->hide();
+        height_label->hide();
+        height_box->hide();
+        width_label->hide();
+        width_box->hide();
+        break;
+    case LINE_SHAPE:
+        //Hide
+        radius_label->hide();
+        radius_box->hide();
+        //Show
+        width_label->show();
+        width_label->setText("Point 2 X");
+        width_box->show();
+        height_label->show();
+        height_label->setText("Point 2 Y");
+        height_box->show();
+        break;
+    case RECT_SHAPE:
+        //Hide
+        radius_label->hide();
+        radius_box->hide();
+        //Show
+        height_label->show();
+        height_label->setText("Height");
+        height_box->show();
+        width_label->show();
+        width_label->setText("Width");
+        width_box->show();
+        break;
+    case CIRCLE_SHAPE:
+        //Hide
+        height_label->hide();
+        height_box->hide();
+        width_label->hide();
+        width_box->hide();
+        //Show
+        radius_label->show();
+        radius_box->show();
+        break;
+
+    case ELLIPSE_SHAPE:
+        //Hide
+        height_label->hide();
+        height_box->hide();
+        width_label->hide();
+        width_box->hide();
+        //Show
+        radius_label->show();
+        radius_box->show();
+        break;
+    default:
+        break;
+    }
 
 }
 
