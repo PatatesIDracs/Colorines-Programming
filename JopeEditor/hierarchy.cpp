@@ -47,6 +47,18 @@ void Hierarchy::DrawHierarchy(QWidget* scene)
         painter.setPen(pen);
 
         switch (drawnObject->GetShape()) {
+        case ShapeType::POINT_SHAPE:
+            {
+            QRect rect = drawnObject->GetRect();
+            painter.drawPoint(rect.x(),rect.y());
+            }
+            break;
+        case ShapeType::LINE_SHAPE:
+            {
+            QRect rect2 = drawnObject->GetRect();
+            painter.drawLine(rect2.x(),rect2.y(),rect2.width(),rect2.height());
+            }
+            break;
         case ShapeType::RECT_SHAPE:
             painter.drawRect(drawnObject->GetRect());
             break;
@@ -221,17 +233,6 @@ void Hierarchy::SaveScene()
     }
 
     f.close();
-}
-
-void Hierarchy::UndoAction()
-{
-    std::cout << "Undo Action" << std::endl;
-
-}
-
-void Hierarchy::RedoAction()
-{
-    std::cout << "Redo Action" << std::endl;
 }
 
 void Hierarchy::ConnectGameObject(GameObject *target)

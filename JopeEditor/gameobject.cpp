@@ -24,7 +24,12 @@ GameObject::GameObject(int i) : type(ELLIPSE_SHAPE)
     size.setY(50);
 
     //Init Renderer
-   // renderer = new Renderer();
+    // renderer = new Renderer();
+}
+
+GameObject::~GameObject()
+{
+    delete renderer;
 }
 
 void GameObject::DrawGeo(QBrush &brush,QPen &pen)

@@ -35,8 +35,6 @@ public slots:
     void CreateNewScene();
     void OpenScene();
     void SaveScene();
-    void UndoAction();
-    void RedoAction();
 
 public:
     Inspector* inspector;

@@ -24,6 +24,7 @@ class GameObject
 {
 public:
     GameObject(int i);
+    ~GameObject();
 
     void DrawGeo(QBrush &brush, QPen &pen);
 

@@ -31,10 +31,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionSave_Scene, SIGNAL(triggered()), hierarchy, SLOT(SaveScene()));
     connect(ui->actionExit, SIGNAL(triggered()), qApp, SLOT(quit()));
 
-    //Maybe we should change the reciver to editor/inspector class
-    connect(ui->actionUndo, SIGNAL(triggered()), hierarchy, SLOT(UndoAction()));
-    connect(ui->actionRedo, SIGNAL(triggered()), hierarchy, SLOT(RedoAction()));
-
     //Signals to update Scene, Inspector, etc.
     connect(hierarchy,SIGNAL(SigHierarchyUpdate(GameObject*)), scene, SLOT(update()));
     connect(inspector,SIGNAL(SigGObjUpdate()), scene, SLOT(update()));
