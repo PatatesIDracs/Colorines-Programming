@@ -101,6 +101,7 @@ void Inspector::SetSelectedGO(GameObject* new_go)
     }
     else
     {
+        name->setText("");
         transform->hide();
     }
 
