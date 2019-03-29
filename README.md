@@ -47,3 +47,21 @@ Authors: Joan Pareja, Pere Rifà
 **Stroke Style:** Drawn style of the outer line     
 
 
+# Qt features    
+**Slots & signals:**    
+The default signals from the Qt widgets were connected to diferent slots in order to affect objects in the scene when
+their values change. We have also created custom signals to easly manage the scene update.      
+
+**QDialogs: Color & File**    
+QFileDialog is used to save and load different scenes.       
+QColorDialog is used in order to select the colors in the renderer options.      
+
+**QDataStream:**     
+Is used to read and write data to/from a stream in order to save and load scenes.      
+
+**QPainter:**   
+Used to render an paint the diferent objects in the scene window.     
+
+**Stylesheet:**      
+Small stylesheet changes are used in order to display the selected color for the object in the color selection button.
+
