@@ -89,6 +89,7 @@ void Inspector::SetSelectedGO(GameObject* new_go)
     if(new_go != nullptr)
     {
         name->setText(new_go->name);
+        transform->show();
         transform->SetPosition(new_go->pos.x(), new_go->pos.y());
         transform->SetScale(new_go->scale.x(), new_go->scale.y());
         current_go = new_go;
@@ -99,6 +100,10 @@ void Inspector::SetSelectedGO(GameObject* new_go)
             current_go->renderer->show();
             layout->addItem(spacer);
         }
+    }
+    else
+    {
+        transform->hide();
     }
 
 }
