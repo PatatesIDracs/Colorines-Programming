@@ -106,9 +106,11 @@ void Hierarchy::RemoveGO()
 
             (i > 0) ? (i < objects.size())? selected = objects[i]: selected = objects[i-1] : selected = nullptr;
 
+            inspector->SetSelectedGO(selected);
             break;
         }
     }
+
     emit SigHierarchyUpdate(nullptr);
 }
 
