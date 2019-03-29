@@ -19,6 +19,8 @@ Renderer::Renderer(QWidget *parent) :
     InitDefaultLayout();
     InitDefaultValues();
 
+    ChangeShapeUI();
+
     connect(fill_color_box, SIGNAL(released()),this, SLOT(SelectFillColor()));
     connect(stroke_color_box, SIGNAL(released()),this, SLOT(SelectStrokeColor()));
     connect(shape_box, SIGNAL(currentIndexChanged(int)),this,SLOT(ChangeShapeUI()));
