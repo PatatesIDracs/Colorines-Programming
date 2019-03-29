@@ -31,6 +31,7 @@ public slots:
     void RemoveGO();
 
     void OnItemClicked();
+    void OnNameChanged();
 
     void CreateNewScene();
     void OpenScene();

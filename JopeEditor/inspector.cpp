@@ -33,7 +33,7 @@ Inspector::Inspector(QWidget *parent) :
 
 
     //Slot connections
-    connect(name,SIGNAL(textEdited(QString)),this, SLOT(TextChanged(QString)));
+    connect(name,SIGNAL(editingFinished()),this, SLOT(TextChanged()));
     connect(transform->GetTranslationXUI(), SIGNAL(valueChanged(double)), this, SLOT(TransformChanged()));
     connect(transform->GetTranslationYUI(), SIGNAL(valueChanged(double)), this, SLOT(TransformChanged()));
     connect(transform->GetScaleXUI(),SIGNAL(valueChanged(double)),this, SLOT(TransformChanged()));
@@ -44,12 +44,12 @@ Inspector::~Inspector()
 {
 }
 
-void Inspector::TextChanged(QString new_name)
+void Inspector::TextChanged()
 {
-    name->setText(new_name);
     if(current_go != nullptr)
     {
-        current_go->name = new_name;
+        current_go->name = name->text();
+        emit SigNameChanged();
     }
 }
 

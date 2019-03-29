@@ -128,6 +128,17 @@ void Hierarchy::OnItemClicked()
     inspector->SetSelectedGO(selected);
 }
 
+void Hierarchy::OnNameChanged()
+{
+    for(uint i = 0; i < objects.size(); i++)
+    {
+        if(objects[i] == selected)
+        {
+            ui->listWidget->item(i)->setText(selected->name);
+        }
+    }
+}
+
 void Hierarchy::CreateNewScene()
 {
     // Clear objects QVector

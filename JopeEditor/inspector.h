@@ -24,6 +24,7 @@ public:
 signals:
 
     void SigGObjUpdate();
+    void SigNameChanged();
 
 public:
     QLineEdit* name;
@@ -36,7 +37,7 @@ public:
 
 public slots:
 
-    void TextChanged(QString new_name);
+    void TextChanged();
     void TransformChanged();
     void EmitUpdate();
 
