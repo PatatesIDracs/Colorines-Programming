@@ -18,7 +18,6 @@ Hierarchy::Hierarchy(QWidget *parent) :
 
     connect(ui->button_addEntity,SIGNAL(clicked()),this,SLOT(CreateNewGO()));
     connect(ui->button_removeEntity, SIGNAL(clicked()), this, SLOT(RemoveGO()));
-
     connect(ui->listWidget,SIGNAL(itemClicked(QListWidgetItem*)),this,SLOT(OnItemClicked()));
 }
 
@@ -104,9 +103,13 @@ void Hierarchy::RemoveGO()
             objects.remove(i);
             delete ui->listWidget->takeItem(i);
 
+            GameObject* temp = selected;
+
             (i > 0) ? (i < objects.size())? selected = objects[i]: selected = objects[i-1] : selected = nullptr;
 
             inspector->SetSelectedGO(selected);
+            delete temp;
+
             break;
         }
     }
@@ -160,8 +163,19 @@ void Hierarchy::CreateNewScene()
 
 void Hierarchy::OpenScene()
 {
-    std::cout << "Open Scene" << std::endl;
 
+    // Open file widget
+    QString file_name = QFileDialog::getOpenFileName(this, "Open a file", QDir::homePath());
+
+    // Open File
+    QFile f(file_name);
+
+    if(!f.open(QFile::ReadOnly))
+    {
+        return;
+    }
+
+    // Delete previous scene
     inspector->SetSelectedGO(nullptr);
     qDeleteAll(objects.begin(), objects.end());
     objects.clear();
@@ -171,19 +185,11 @@ void Hierarchy::OpenScene()
 
     selected = nullptr;
 
-    // Open file widget
-    QString file_name = QFileDialog::getOpenFileName(this, "Open a file", QDir::homePath());
-
-    QFile f(file_name);
-
-    if(!f.open(QFile::ReadOnly))
-    {
-        return;
-    }
-
+    // Read file data
     QDataStream stream(&f);
     stream.setVersion(QDataStream::Qt_4_0);
 
+    // Load Scene
     QString text;
     int numObj;
     stream >> text;
@@ -218,14 +224,13 @@ void Hierarchy::OpenScene()
 
 void Hierarchy::SaveScene()
 {
-    std::cout << "Save Scene" << std::endl;
-
-    // SaveScene
+    // Get file scene name
     QString file_name = QFileDialog::getSaveFileName(this, "Save file", "");
 
     if(!file_name.endsWith(".jope"))
         file_name += ".jope";
 
+    // Create or open file
     QFile f(file_name);
 
     if(!f.open(QFile::WriteOnly))
@@ -233,6 +238,7 @@ void Hierarchy::SaveScene()
         return;
     }
 
+    // Save Scene
     QDataStream outstream(&f);
     outstream << QString("Scene Gameobjects");
     outstream << count;
@@ -250,6 +256,7 @@ void Hierarchy::SaveScene()
 
 void Hierarchy::ConnectGameObject(GameObject *target)
 {
+    // Connect UI signals to slots
     connect(target->renderer->shape_box, SIGNAL(currentIndexChanged(int)),inspector,SLOT(EmitUpdate()));
     connect(target->renderer->height_box, SIGNAL(valueChanged(double)),inspector,SLOT(EmitUpdate()));
     connect(target->renderer->width_box, SIGNAL(valueChanged(double)),inspector,SLOT(EmitUpdate()));

@@ -39,6 +39,7 @@ public slots:
 
 public:
     Inspector* inspector;
+
 private:
     Ui::Hierarchy *ui;
     QVector<GameObject*> objects;

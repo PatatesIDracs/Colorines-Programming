@@ -28,7 +28,7 @@ public:
 
     void DrawGeo(QBrush &brush, QPen &pen);
 
-    void Save(QDataStream &stream);
+    void Save(QDataStream &stream) const;
     void Load(QDataStream &stream);
 
     // Transform Methods

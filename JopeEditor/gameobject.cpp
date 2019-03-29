@@ -13,18 +13,15 @@ GameObject::GameObject(int i) : type(ELLIPSE_SHAPE)
     name = "New GameObject ";
     name.append(QString::number(i));
 
-    //test
+    // Data
     pos.setX(50);
-    pos.setY(75);
+    pos.setY(50);
 
     scale.setX(1);
-    scale.setY(2);
+    scale.setY(1);
 
     size.setX(50);
     size.setY(50);
-
-    //Init Renderer
-    // renderer = new Renderer();
 }
 
 GameObject::~GameObject()
@@ -34,17 +31,20 @@ GameObject::~GameObject()
 
 void GameObject::DrawGeo(QBrush &brush,QPen &pen)
 {
+    // Get brush data
     brush.setColor(GetFillColor());
     brush.setStyle(Qt::BrushStyle::SolidPattern);
 
+    // Get Pen data
     pen.setWidth(GetStrokeThickness());
     pen.setColor(GetStrokeColor());
     pen.setStyle(GetStrokeStyle());
 
 }
 
-void GameObject::Save(QDataStream &outstream)
+void GameObject::Save(QDataStream &outstream) const
 {
+    // Save GameObject Data into a binary file
     outstream << name;
     outstream << static_cast<int>(type);
 
@@ -57,6 +57,7 @@ void GameObject::Save(QDataStream &outstream)
 
 void GameObject::Load(QDataStream &stream)
 {
+    // Load GameObject Data from a binary file
     stream >> name;
 
     int i = 0;
@@ -75,10 +76,7 @@ void GameObject::Load(QDataStream &stream)
 void GameObject::SetPos(float x, float y)
 {
     pos.setX(x);
-   // qDebug("Pos X: %f", pos.x());
     pos.setY(y);
-    // qDebug("Pos Y: %f", pos.y());
-
 }
 
 void GameObject::SetScale(float x, float y)

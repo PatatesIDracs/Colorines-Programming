@@ -3,8 +3,6 @@
         <file alias="new_scene">Textures/Badge-plus.png</file>
         <file alias="empty_scene">Textures/Empty document new.png</file>
         <file alias="open_file">Textures/Folder.png</file>
-        <file alias="undo">Textures/Arrow left.png</file>
-        <file alias="redo">Textures/Arrow right.png</file>
         <file alias="save">Textures/Disquette.png</file>
     </qresource>
 </RCC>

@@ -24,7 +24,7 @@ public:
     void InitDefaultLayout();
     void InitDefaultValues();
 
-    void Save(QDataStream &outstream);
+    void Save(QDataStream &outstream) const;
     void Load(QDataStream &instream);
 
 

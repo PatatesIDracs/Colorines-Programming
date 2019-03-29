@@ -55,8 +55,6 @@ void Inspector::TextChanged()
 
 void Inspector::TransformChanged()
 {
-    std::cout << "Transform Changed" << std::endl;
-
     if(current_go != nullptr)
     {
         current_go->SetPos(transform->GetPosX(), transform->GetPosY());

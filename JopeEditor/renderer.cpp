@@ -26,15 +26,6 @@ Renderer::Renderer(QWidget *parent) :
 
 Renderer::~Renderer()
 {
-    //Disconnect all signals
-    disconnect(shape_box, nullptr,nullptr,nullptr);
-    disconnect(height_box, nullptr,nullptr,nullptr);
-    disconnect(width_box, nullptr,nullptr,nullptr);
-    disconnect(radius_box, nullptr,nullptr,nullptr);
-    disconnect(fill_color_box, nullptr,nullptr,nullptr);
-    disconnect(stroke_color_box, nullptr,nullptr,nullptr);
-    disconnect(stroke_thick_box, nullptr,nullptr,nullptr);
-    disconnect(stroke_style_box, nullptr,nullptr,nullptr);
 }
 
 void Renderer::Init()
@@ -140,7 +131,7 @@ void Renderer::InitDefaultValues()
     radius_box->setValue(50.f);
 }
 
-void Renderer::Save(QDataStream &outstream)
+void Renderer::Save(QDataStream &outstream) const
 {
     //Shape
     outstream << shape_box->currentIndex();
